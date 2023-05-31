@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+.screen-container {
+	min-width: 100vw; background-color : var( --light);
+	border: 1px solid white;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--light);
+	padding: 1rem;
+}
+
+.screen-container .pi {
+	font-size: 3rem;
+}
+
+.screen-container form {
+	min-width: 100%;
+}
+
+.screen-container h2 {
+	color: var(--dark);
+}
+
+.screen-container .ui-button {
+	min-width: 46%;
+	min-height: 3rem;
+	background-color: var(--dark);
+	color: var(--light);
+	font-size: 1rem;
+	vertical-align: center;
+	text-align: center;
+}
+
+.screen-container .ui-button:hover {
+	background-color: var(--less-dark);
+}
+
+.screen-container .ui-button .ui-icon {
+	font-size: 2rem;
+}
+
+.screen-container  .ui-button .ui-button-icon-only{ 
+	margin-top: -1rem;
+}
+
+.banner {
+	position: absolute;
+	left: 0;
+	top: 0;
+	border: 1px solid green;
+	min-width: 100%;
+	max-height: 5rem;
+	text-align: center;
+}
+
+.line-component {
+	min-width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.component {
+	max-height: 5rem;
+	min-width: 100%;
+	padding: 0.2rem 1rem;
+}
+
+.component input, .component label {
+	line-height: 3rem;
+	border-radius: 0.3rem;
+	min-width: 100%;
+	background-color: var(--less-light);
+	padding: 0 1rem;
+	font-size: 1.5rem;
+	color: var(--dark);
+	
+}
+
+.component .ui-selectonemenu {
+	background: var(--less-light);
+	color: var(--dark);
+	border-radius: 0.3rem;
+}
+
+.birdthdate {
+	min-width: 100%;
+}
+
+.number-street {
+	max-width: 6rem;
+}
+
+.number-street input {
+	background-color: var(--light);
+	border-radius: 0.5rem;
+}
+
+.number-type {
+	max-height: 2.5rem;
+}
+
+.lastname input {
+	width: 10rem;
+}

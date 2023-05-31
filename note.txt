@@ -1,0 +1,25 @@
+Adresse 			: CRUD ok
+Article 		: CRUD ok check one tomay ok 
+ArticlePanier  : CRUD ok
+CartePaiement  CRUD ok 
+Categorie:  CRUD ok 
+Commande:  CRUD ok 
+Commentaire CRUD ok
+LigneDeCommande CRUD ok
+Params	: CRUD ok 
+User 			: CRUD ok 
+
+---------------------------------------------
+
+a faire : les relatiions one to one
+
+Adresse 			
+Article 		 
+ArticlePanier 
+CartePaiement  
+Categorie:   
+Commande:    relation ok 
+Commentaire 
+LigneDeCommande
+Params	:  
+User 		 

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.homePage{
+	
+	max-width: 20rem;
+	max-height: 50%;
+	
+}
+
+.submit-button{
+	background-color:var(--back);
+	
+}
+
+.input-text {
+	
+	
+}
