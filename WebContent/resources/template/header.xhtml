@@ -11,15 +11,15 @@
 <ui:composition>
 	<h:form>
 
-		<div class="header_container largest "> <nav
-			class="navigation"> 
-			<span class="logo">
-			<h:commandLink action="/accueil.xhtml" class="logo-link">
-			<h:graphicImage library="images"
-					name="jasmin.png" alt="Logo ecommerce" />
-				</h:commandLink>
-				</span>
-			
+		<header class="header_container largest "> 
+		<nav
+			class="navigation"> <span class="logo"> <h:commandLink
+				action="/accueil.xhtml" class="logo-link">
+				<h:graphicImage library="images" name="jasmin.png"
+					alt="Logo ecommerce" />
+			</h:commandLink>
+		</span>
+
 		<ul class="nav-list ">
 
 
@@ -41,26 +41,27 @@
 			<li><h:commandLink action="/item-management.xhtml">
 					<h:outputText value="Test"></h:outputText>
 				</h:commandLink></li>
-		</ul>
-		<div class="addOn">
-			<h:outputText value="#{loginBean.welcome}"></h:outputText>
-			
-			<h:commandLink action="#{loginBean.disconnect}">
+			<li><h:commandLink action="/resources/module/select-categorie.xhtml">
+					<h:outputText value="selectTest"></h:outputText>
+				</h:commandLink></li>
+				
+				
+			<li class="addOn"><h:outputText value="#{loginBean.welcome}"></h:outputText></li>
+			<li><h:commandLink action="#{loginBean.disconnect}">
 					<h:outputText value="#{msg['menu.disconnect']}"></h:outputText>
-				</h:commandLink>
-		
-		</div>
-		
-		
-		<span type="button" aria-label="toggle curtain navigation"
-			id="btn-mobile" class="menu-mobile" spellcheck="false"> 
-			<span class="line l1"></span> 
-			<span class="line l2"></span> 
-			<span class="line l3"></span>
+				</h:commandLink></li>
 
-		</span> 
-		</nav> 
-		</div>
+		</ul>
+
+
+
+
+		<span type="button" aria-label="toggle curtain navigation"
+			id="btn-mobile" class="menu-mobile" spellcheck="false"> <span
+			class="line l1"></span> <span class="line l2"></span> <span
+			class="line l3"></span>
+
+		</span> </nav> </header>
 
 
 	</h:form>

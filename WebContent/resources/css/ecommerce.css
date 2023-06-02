@@ -33,12 +33,13 @@
 	background-color: var(--back);
 	margin-bottom: 1rem;
 	display: flex;
+	flex-wrap:wrap;
 	flex-direction: row;
 	justify-content: space-around;
 }
 
 .logo {
-	max-width: 15%;
+	width: 15%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -182,13 +183,10 @@ a:hover {
 }
 
 .footer {
-	position: absolute;
-	left: 0;
-	bottom: 0;
 	min-width: 100%;
 	min-height: 3rem;
 	border-radius: 1rem 1rem 0 0;
-	background-color: var(--back);
+	background-color: var(--mid);
 	padding: 1rem;
 	display: flex;
 	flex-direction: row;

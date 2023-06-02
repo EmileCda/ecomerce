@@ -19,9 +19,7 @@
 <h:body>
 	<div id="page">
 			<ui:insert name="header">
-		<div id="header" class="header">
 				<ui:include src="/resources/template/header.xhtml" />
-		</div>
 			</ui:insert>
 
 		<div id="content" class="content">
@@ -30,13 +28,11 @@
 			</ui:insert>
 		</div>
 
-		<div id="footer" class="footer">
 			<ui:insert name="footer">
 				<ui:include src="/resources/template/footer.xhtml">
 					<ui:param name="auteur" value="www.jasmin.fr" />
 				</ui:include>
 			</ui:insert>
-		</div>
 	</div>
 </h:body>
 
