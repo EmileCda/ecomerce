@@ -4,7 +4,10 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	   font-family: sans-serif;
 }
+}
+
 
 :root {
 	--back: #e7ecef;
@@ -19,13 +22,14 @@
 	background-color: var(--less-for);
 }
 
+
 #page {
 	width: 100vw;
 }
 
 .header {
 	min-width: 100%;
-	height: 5rem;
+	height: 7rem;
 	background-color: var(--back);
 	margin-bottom: 1rem;
 	display: flex;

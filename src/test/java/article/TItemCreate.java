@@ -1,10 +1,9 @@
 package article;
 
 import fr.ecommerce.entity.Categorie;
-import fr.ecommerce.entity.Costumer;
+
 import fr.ecommerce.entity.Article;
 import fr.ecommerce.model.dao.implement.CrudDao;
-import fr.ecommerce.model.dao.interfaces.ICrudDao;
 import fr.ecommerce.utils.DataTest;
 import fr.ecommerce.utils.Utils;
 

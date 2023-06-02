@@ -6,6 +6,7 @@ import java.util.List;
 import fr.ecommerce.Ctrl.implement.UserCtrl;
 import fr.ecommerce.Ctrl.interfaces.IUserCtrl;
 import fr.ecommerce.entity.User;
+import fr.ecommerce.enums.Profile;
 import fr.ecommerce.model.dao.implement.UserDao;
 import fr.ecommerce.model.dao.interfaces.IUserDao;
 import fr.ecommerce.utils.DataTest;
@@ -15,9 +16,10 @@ public class TUser {
 
 	public static void main(String[] args) {
 		Utils.trace("*************************** Begin ************************************\n");
-		createOne();
-		createMany();
-		readOne(1);
+		initUserTest();
+//		createOne();
+//		createMany();
+//		readOne(1);
 //		readMany();
 //		update();
 //		delete();
@@ -26,7 +28,34 @@ public class TUser {
 
 	}
 
-//-------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------
+	public static void initUserTest() {
+		String StringArray[] = {"a","c","m"};
+		User user = null ;
+		int id;
+		for (String string : StringArray) {
+			user = getUser(string);
+			if (user !=null) {
+				remove(user.getId());
+			}
+			id = createOne();
+			user = getUser(id);
+			user.setEmail(string);
+			user.setPassword(string);
+			
+			switch (string) {
+			case "a" : user.setProfile(Profile.MANAGER); break ; 
+			case "m" : user.setProfile(Profile.STORE_KEEPER); break ;
+			default  : user.setProfile(Profile.COSTUMER); break ; 
+			}
+			
+			update(user);
+		}
+//		
+
+	}
+
+	// -------------------------------------------------------------------------------------------------
 	public static void create() {
 		Utils.trace("=========================== Create ===========================\n");
 		createOne();
@@ -42,24 +71,49 @@ public class TUser {
 
 	}
 
-//-------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------
+	public static void update(User user) {
+		
+		User usrCheck ; 
+
+		IUserCtrl userCtrl = new UserCtrl();
+		try {
+			usrCheck = userCtrl.getUserById(user.getId());
+			if (usrCheck == null)
+				Utils.trace("User null \n");
+			else {
+				Utils.trace("Before  %s\n", usrCheck);
+				userCtrl.updateUser(user);
+				user = userCtrl.getUserById(user.getId());
+				if (user != null)
+					Utils.trace("After %s\n", user);
+				else
+					Utils.trace("Address null\n");
+			}
+
+		} catch (
+
+		Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// -------------------------------------------------------------------------------------------------
 	public static void update() {
 		Utils.trace("=========================== Update ===========================\n");
 		int userId = 5;
 		User user = null;
-
 		IUserCtrl userCtrl = new UserCtrl();
 		try {
 			user = userCtrl.getUserById(userId);
 			if (user == null)
-				Utils.trace("Address null\n");
+				Utils.trace("User null \n");
 			else {
 				Utils.trace("Before  %s\n", user);
-
-				// -------------------------- update ----------------------
-				user.setFirstname( "*** mod ***" + user.getFirstname() + "*** mod ***");
+				user.setFirstname("luulu");
 				userCtrl.updateUser(user);
-
 				user = userCtrl.getUserById(userId);
 				if (user != null)
 					Utils.trace("After %s\n", user);
@@ -73,12 +127,18 @@ public class TUser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
-//-------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------
 	public static void delete() {
-		Utils.trace("=========================== Delete ===========================\n");
 		int userId = 1;
+		remove(userId);
+
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	public static void remove(int userId) {
 		User user = new User();
 		IUserCtrl userCtrl = new UserCtrl();
 		IUserDao userDao = new UserDao();
@@ -104,7 +164,7 @@ public class TUser {
 	}
 	// -------------------------------------------------------------------------------------------------
 
-	public static void createOne() {
+	public static int createOne() {
 
 		User user = new User();
 		user = DataTest.genUser();
@@ -121,6 +181,7 @@ public class TUser {
 		}
 
 		Utils.trace("%s\n", user);
+		return user.getId();
 	}
 	// -------------------------------------------------------------------------------------------------
 
@@ -164,10 +225,9 @@ public class TUser {
 			Utils.trace("user null");
 	}
 
-//-------------------------------------------------------------------------------------------------	
-	public static void readOne(int userId) {
-		Utils.trace("=========================== read One  ===========================\n");
-		
+	// -------------------------------------------------------------------------------------------------
+	public static User getUser(int userId) {
+
 		User user = new User();
 		IUserCtrl userCtrl = new UserCtrl();
 		try {
@@ -175,6 +235,43 @@ public class TUser {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return user;
+
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	public static User getUser(String email) {
+
+		User user = new User();
+		IUserCtrl userCtrl = new UserCtrl();
+		try {
+			user = userCtrl.getUserByEmail(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return user;
+
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	public static void readOne(String email) {
+		Utils.trace("=========================== read One by email  ===========================\n");
+
+		User user = getUser(email);
+		if (user != null)
+			Utils.trace("%s\n", user);
+		else
+			Utils.trace("user null\n");
+
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	public static void readOne(int userId) {
+		Utils.trace("=========================== read One  by Id===========================\n");
+		
+		User user = getUser( userId);
 		if (user != null)
 			Utils.trace("%s\n", user);
 		else

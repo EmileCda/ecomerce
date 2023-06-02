@@ -10,6 +10,9 @@ public interface IConstant {
 
 // common to all class 
 	
+//	public final String HR  = "*********************************************************\n";
+	public final String HR  = "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n";
+
 	public final String DEFAULT_TEXT = "Et je m’en vais au vent mauvais Qui m’emporte Deçà, delà,Pareil à la Feuille morte.";
 	public final int DEFAULT_INT= 0 ; 
 	public final String DATE_FORMAT= "dd/MM/yyyy";
@@ -90,7 +93,7 @@ public interface IConstant {
 	public final String CART  			= "cart.xhtml";
 	public final String CONFIRM  		= "confirm.xhtml";
 	public final String CREATE_USER  	= "create-user.xhtml";
-	public final String HOME  			= "home.xhtml";
+	public final String HOME  			= "accueil.xhtml";
 	public final String ITEM  			= "item.xhtml";
 	public final String ORDER_HISTORY  	= "order-history.xhtml";
 	public final String POURCHASE_VALIDATED  = "purchase-validated.xhtml";

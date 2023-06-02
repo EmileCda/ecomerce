@@ -10,16 +10,25 @@ Params	: CRUD ok
 User 			: CRUD ok 
 
 ---------------------------------------------
+teste des relations onetoone onetomany
+A faire : les relatiions one to one
 
-a faire : les relatiions one to one
-
-Adresse 			
-Article 		 
-ArticlePanier 
-CartePaiement  
-Categorie:   
+Adresse 		: baddredine  ok	
+Article 		: baddredine  ok
+ArticlePanier : baddredine ok
+CartePaiement  : baddredine ok
+Categorie:   : baddredine ok
 Commande:    relation ok 
-Commentaire 
-LigneDeCommande
-Params	:  
-User 		 
+Commentaire  : emile  ok
+LigneDeCommande : emile  ok
+Params	:  : emile  ok
+User 		 : emile  ok
+----------------------------------
+test avec IHM 
+
+connexion ok 
+delete user : ok
+fonction affichier welcome+ profile + prénom (ok)
+deconnexion : fait  
+add client ok : reste à faire la feuille de style
+add from Manager : ok 

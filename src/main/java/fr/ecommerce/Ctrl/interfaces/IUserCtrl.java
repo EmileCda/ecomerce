@@ -11,6 +11,7 @@ public interface IUserCtrl {
 	public User getUserByEmail(String email) throws Exception;
 	public List<User> getUsers() throws Exception;
 	public void updateUser(User user) throws Exception; 
+	public int deleteUser(User user) throws Exception ;
 	
 	
 }

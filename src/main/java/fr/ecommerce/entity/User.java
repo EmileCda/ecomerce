@@ -1,7 +1,7 @@
 package fr.ecommerce.entity;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
+
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -9,16 +9,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -26,14 +21,12 @@ import javax.persistence.Transient;
 import fr.ecommerce.common.IConstant;
 import fr.ecommerce.enums.Gender;
 import fr.ecommerce.enums.Profile;
-import fr.ecommerce.utils.Encryption;
-import fr.ecommerce.utils.Utils;
 
 
 
 @Entity
 @Table(name="user")
-public class User  implements IConstant,Serializable {
+public final class User  implements IConstant,Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -178,6 +171,19 @@ public class User  implements IConstant,Serializable {
 	}
 
 	
+	public void clean() {
+		this.setId(DEFAULT_ID);
+		this.setEmail(null);
+		this.setPassword(null);
+		this.setFirstname(null);
+		this.setLastname(null);
+		this.setPhoneNumber("");
+		this.setGender(null);
+		this.setProfile(null);
+		this.setBirthdate(null);
+		
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -295,7 +301,7 @@ public class User  implements IConstant,Serializable {
 	public String toString() {
 		String stringReturn = ""; 
 		stringReturn +=String.format("Id[%d], %s, %s,%s, %s, %s, {%s}\n",
-									getId(), getProfile(), 
+									getId(), getProfile().getName(), 
 									getFirstname(),getLastname(),
 									getEmail(), getPassword(), (getIsActif()?"" :"non-") + "actif");
 		if (this.getAddressList().size()>0 ) {
