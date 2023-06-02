@@ -101,8 +101,7 @@ public class TCommentaire {
 					Utils.trace("remove ok\n");
 			}
 		} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				 				e.printStackTrace();
 		}
 
 	}

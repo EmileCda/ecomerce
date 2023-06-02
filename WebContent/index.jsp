@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BlueJar e-commerce</title>
+<title>e-commerce</title>
 </head>
 <body>
-<jsp:forward page="faces/home.xhtml"></jsp:forward>
+<jsp:forward page="faces/accueil.xhtml"></jsp:forward>
 
 </body>
 </html>

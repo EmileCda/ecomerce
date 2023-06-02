@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -10,24 +11,35 @@
 <title>Home</title>
 </head>
 <ui:composition template="/resources/template/main-template.xhtml">
-
 	<ui:define name="content">
 		<f:view>
+
 			<h:form>
-				<f:metadata>
-					<f:viewParam name="id" value="#{loginBean.user.id}" />
-				</f:metadata>
+				<h3>#{msg['home.title']}</h3>
+
+				<h:graphicImage library="images" name="homepage.jpg"
+					class="homePage" />
+
+				<div class="main-container">
+					<div class="row-div message">
+					<h:commandLink action="/login-utilisateur.xhtml">
+						<h:outputText value="#{msg['home.connection']}"></h:outputText>
+					</h:commandLink>
+						
+					</div>
+					
+					<div class="row-div message">
+					<h:commandLink action="/add-utilisateur.xhtml">
+						<h:outputText value="#{msg['home.subscibre']}"></h:outputText>
+					</h:commandLink>
+					
+					</div>
+				</div>
 
 
-				<h2>#{msg['admin.management.title']}</h2>
-
-				<h:outputText value="bonjour #{loginBean.user.email}" />
-				<h:outputText
-					value="#{msg['admin.management.you.are']} #{loginBean.user.profile.name}" />" 
-				<ui:include src="/resources/module/add-account.xhtml" />
-				<ui:include src="/resources/module/user-list.xhtml" />
 			</h:form>
 		</f:view>
 	</ui:define>
 </ui:composition>
+
 </html>

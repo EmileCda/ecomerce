@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.ecommerce.entity.Adresse;
-import fr.ecommerce.entity.Costumer;
+
 import fr.ecommerce.model.dao.implement.AdresseDao;
 import fr.ecommerce.model.dao.implement.CrudDao;
 import fr.ecommerce.model.dao.interfaces.IAdresseDao;

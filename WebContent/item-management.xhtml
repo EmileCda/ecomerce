@@ -15,18 +15,21 @@
 	<ui:define name="content">
 		<f:view>
 			<h:form>
-				<h2>#{msg['item.management.title']}</h2>
-				<h:graphicImage library="images" name="storekeeper.jpg"
-					class="homePage" />
-				<br />
-				<h:outputText value="bonjour #{loginBean.user.email}" />
-				<br />
-				<h:outputText
-					value=" #{msg['item.management.you.are']} #{loginBean.user.profile.name}" />" 
-					
-
-
+				<h:selectOneMenu value="#{itemManagementBean.categorieId}"
+					onchange="submit()"
+					valueChangeListener="#{itemManagementBean.categorieChange}">
+					<f:selectItems value="#{itemManagementBean.categorieList}"
+						var="oneCat" itemValue="#{oneCat.id}" itemLabel="#{oneCat.name}" />
+				</h:selectOneMenu>
 			</h:form>
+			<p>#{itemManagementBean.promptStatus}</p>
+			<ui:include src="/resources/module/add-category.xhtml" />
+			
+			<ui:include src="/resources/module/item-by-category.xhtml" />
+
+<!-- 			<ui:include src="/resources/module/category-list.xhtml" /> -->
+			
+			
 		</f:view>
 	</ui:define>
 </ui:composition>

@@ -4,20 +4,24 @@ package fr.ecommerce.enums;
 
 public enum Gender {
 
-	MALE("Homme","M.",0),FEMALE("Femme","Mme",1), OTHER("autre","",2),NULL("","",3) ;
+	MALE("Homme","Monsieur","M.",0),
+	FEMALE("Femme","Madame","Mme",1), 
+	OTHER("autre","","",2),NULL("","","",3) ;
 	
 	private String value;
+	private String name;
 	private String title;
 	private int id;
 	
-	private Gender(String value,String title,int id) {
+	private Gender(String value,String name,String title,int id) {
 		this.setValue(value);
+		this.setName(name);
 		this.setTitle(title);
 		this.setId(id);
 	}
 	private Gender() {
 		
-		this("","",-1);
+		this("","","",-1);
 	}
 	
 	
@@ -59,6 +63,12 @@ public enum Gender {
 	}
 	public String getValue() {
 		return this.value;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

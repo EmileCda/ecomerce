@@ -38,12 +38,15 @@
 						<h:message for="password" />
 					</div>
 					<div class="row-div">
+						<p>#{loginBean.promptStatus}</p>
+					</div>
+					<div class="row-div">
 						<h:commandButton id="submitConnection"
 							value="#{msg['connection.submit']}" styleClass="submit-button"
 							action="#{loginBean.checkUser}" />
 					</div>
 					<div class="row-div message">
-						<h:link value="#{msg['connection.not-subscibre-yet']}" outcome="create-user" />
+						<h:link value="#{msg['connection.not-subscibre-yet']}" outcome="add-utilisateur.xhtml" />
 					</div>
 				</div>
 
