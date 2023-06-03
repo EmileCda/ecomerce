@@ -5,24 +5,26 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Home</title>
-</head>
 <ui:composition template="/resources/template/main-template.xhtml">
-
 	<ui:define name="content">
 		<f:view>
 			<h:form>
 				<h2>#{msg['procurement.management.title']}</h2>
-				<h:graphicImage library="images" name="client.jpg"
-					class="homePage" />
-										<br/>
 				<h:outputText value="bonjour #{loginBean.user.firstname}" />
-					<br/>
-					<h:outputText value=" #{msg['procurement.management.you.are']} : #{loginBean.user.profile.name}" />" 
-					
+				<br />
+				<h:outputText
+					value=" #{msg['procurement.management.you.are']} : #{loginBean.user.profile.name}" />" 
+				<h:selectOneMenu value="#{itemManagementBean.categorieId}"
+					onchange="submit()"
+					valueChangeListener="#{itemManagementBean.categorieChange}">
+					<f:selectItems value="#{itemManagementBean.categorieList}"
+						var="oneCat" itemValue="#{oneCat.id}" itemLabel="#{oneCat.name}" />
+				</h:selectOneMenu>
 			</h:form>
+
+			<ui:include src="/resources/module/item-by-category.xhtml" />
+
 		</f:view>
 	</ui:define>
-</ui:composition></html>
+</ui:composition>
+</html>

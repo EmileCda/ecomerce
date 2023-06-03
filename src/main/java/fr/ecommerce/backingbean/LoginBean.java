@@ -19,6 +19,7 @@ public class LoginBean  extends MasterBean implements IConstant {
 	
 	private String welcome = null;
 	private boolean isAdmin ;
+	private boolean isStoreKeeper ;
 
 
 	public LoginBean() {
@@ -54,6 +55,7 @@ public class LoginBean  extends MasterBean implements IConstant {
 								this.setIsAdmin(true);
 								break ;
 			case STORE_KEEPER: pageReturn =STOREKEEPER_HOME; 
+								this.setStoreKeeper(true);
 								break ;  
 			default:
 				return pageReturn = HOME;
@@ -114,6 +116,18 @@ public class LoginBean  extends MasterBean implements IConstant {
 		}
 		public void setIsAdmin(boolean isAdmin) {
 			this.setAdmin(isAdmin); 
+		}
+		public boolean isStoreKeeper() {
+			return isStoreKeeper;
+		}
+		public boolean getIsStoreKeeper() {
+			return this.isStoreKeeper();
+		}
+		public void setIsStoreKeeper(boolean isStoreKeeper) {
+			this.setStoreKeeper(isStoreKeeper);
+		}
+		public void setStoreKeeper(boolean isStoreKeeper) {
+			this.isStoreKeeper = isStoreKeeper;
 		}
 
 		

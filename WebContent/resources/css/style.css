@@ -1,4 +1,5 @@
 
+/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+common+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  */
 
 
 :root {
@@ -31,6 +32,28 @@ a{
 
 .largest{
     width: 100%;
+}
+
+
+
+
+
+
+
+
+#menu-toggle {
+/* 	display: none; */
+	display: Bloc;
+	
+}
+
+#menu-toggle:checked+.menu-button-container .menu-button::before {
+	margin-top: 0px;
+	transform: rotate(405deg);
+}
+
+#menu-toggle:checked+.menu-button-container .menu-button {
+	background:var(--back);
 }
 
 

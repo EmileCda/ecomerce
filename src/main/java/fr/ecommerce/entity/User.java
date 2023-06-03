@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -62,6 +63,11 @@ public final class User  implements IConstant,Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 //	@Transient
 	private List<ArticlePanier> cartItemList; // meaning cart : item + quan
+
+	@Transient
+	private Map<Integer, Integer> cartItemMap; // meaning cart : item + quan
+	
+	
 	
 	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "user", fetch = FetchType.LAZY)
 //	@Transient
@@ -135,6 +141,10 @@ public final class User  implements IConstant,Serializable {
 
 	}
 
+	public void addCartItem(ArticlePanier item,int quantity) {
+		initCartItemMap();
+		this.getCartItemMap().put(item.getId(),quantity);
+	}
 
 
 
@@ -168,6 +178,10 @@ public final class User  implements IConstant,Serializable {
 			this.setCartItemList(new ArrayList<ArticlePanier>());
 		
 
+	}
+	public void initCartItemMap() {
+		if (this.getCartItemList() == null) 
+			this.setCartItemList(new ArrayList<ArticlePanier>());
 	}
 
 	
@@ -319,6 +333,12 @@ public final class User  implements IConstant,Serializable {
 		
 		return stringReturn; 
 		
+	}
+	public Map<Integer, Integer> getCartItemMap() {
+		return cartItemMap;
+	}
+	public void setCartItemMap(Map<Integer, Integer> cartItemMap) {
+		this.cartItemMap = cartItemMap;
 	}
 	
 }

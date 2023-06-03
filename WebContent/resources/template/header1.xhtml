@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<body>
+	<ui:composition>
+
+
+		<div class="logo">
+			<h:graphicImage library="images" name="jasmin.png" class="w5" />
+		</div>
+		<div class="header-title">
+			<h1>#{msg['project.title']}</h1>
+		</div>
+		<h:form> 
+		
+		<input id="menu-toggle" type="checkbox" /> 
+		<label	class="menu-button-container" for="menu-toggle">
+			<div class="menu-button"></div>
+		</label>
+		
+		<ul class="menu">
+			<li><h:commandLink action="/home.xhtml">
+					<h:outputText value="#{msg['menu.home']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/home.xhtml">
+					<h:outputText value="#{msg['menu.user.login']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/procurement-management.xhtml">
+					<h:outputText value="#{msg['menu.purchase']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/add-user.xhtml">
+					<h:outputText value="#{msg['menu.addUser']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/cart.xhtml">
+					<h:outputText value="#{msg['menu.cart']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/test.xhtml">
+					<h:outputText value="Test"></h:outputText>
+				</h:commandLink></li>
+		</ul>
+		</h:form>
+
+	
+	</ui:composition>
+</body>
+</html>

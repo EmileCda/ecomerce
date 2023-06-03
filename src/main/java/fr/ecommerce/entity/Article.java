@@ -176,8 +176,16 @@ public class Article extends ClassDao implements IConstant, Serializable {
 		return isSalable;
 	}
 
+	public boolean getIsSalable() {
+		return isSalable();
+	}
+
 	public void setSalable(boolean isSalable) {
 		this.isSalable = isSalable;
+	}
+
+	public void setIsSalable(boolean isSalable) {
+		this.setSalable(isSalable);
 	}
 
 	public String getPicture() {

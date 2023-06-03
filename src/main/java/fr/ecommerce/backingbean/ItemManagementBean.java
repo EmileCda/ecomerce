@@ -10,7 +10,7 @@ import javax.faces.event.ValueChangeEvent;
 import fr.ecommerce.Ctrl.implement.UserCtrl;
 import fr.ecommerce.Ctrl.interfaces.IUserCtrl;
 import fr.ecommerce.common.IConstant;
-
+import fr.ecommerce.entity.Article;
 import fr.ecommerce.entity.Categorie;
 import fr.ecommerce.entity.User;
 import fr.ecommerce.model.dao.implement.CategorieDao;
@@ -38,17 +38,17 @@ public class ItemManagementBean extends MasterBean implements IConstant {
 			e.printStackTrace();
 		}
 		
-		if (this.getCategorieList().size()>0 ) {				// prendre l'id (par défaut) du premier de la liste 
+		if (this.getCategorieList().size()>=0 ) {				// prendre l'id (par défaut) du premier de la liste 
 			this.setCategorieId(this.getCategorieList()
-								.get(1)
+								.get(0)
 								.getId());
 			
 		}else
-			this.setCategorieId(0);								// liste vide
-			
-		this.setCategorieId(5);								// liste vide
-		this.setCurrentCategorie( this.getCategorieList()
-									.get(this.getCategorieId()));
+			this.setCategorieId(DEFAULT_ID);								// in case of empty list
+		
+		setCurrentCategorie(this.getCategorieId());
+		this.cleanPromptStatus();
+		this.setPromptStatus(String.format("catégorie en cours : %s",this.getCurrentCategorie().getName() ));
 		
 
 	}
@@ -79,15 +79,38 @@ public class ItemManagementBean extends MasterBean implements IConstant {
 			return pageReturn;
 		}
 		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-		public String categorieChange(ValueChangeEvent e) {
-			String pageReturn = null ;
-			Utils.trace("categorieChange  : %s\n", this.getCategorieId());
-			Utils.trace("categorieChange  : %s\n", e.getNewValue().toString());
-			Utils.trace("categorieChange d : %d\n", e.getNewValue());
-			Utils.trace("categorieChange 2  : %s\n", this.getCategorieId());
+		public String updateItem(Article article) {
+			
+			String pageReturn = null ; 
 		
-			this.setPromptStatus(String.format("Id cat : %d", e.getNewValue()));
+			return pageReturn;
+		}
+		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		public String deleteItem(Article article) {
+			
+			String pageReturn = null ; 
+		
+			return pageReturn;
+		}
+		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		public String addItempToCart(Article article) {
+			
+			String pageReturn = null ;
+			
+			
+		
+			return pageReturn;
+		}
+		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+		public String categorieChange(ValueChangeEvent eventCategoryList) {
+			String pageReturn = null ;
+			int categoryId = (int)eventCategoryList.getNewValue();
+//			Categorie categorySelected = this.getCategorieList().get(categoryId );
+
+			this.setCurrentCategorie( categoryId);
+			
+			this.setPromptStatus(String.format("catégorie en cours : %s",this.getCurrentCategorie().getName() ));
 			return pageReturn;
 		}
 	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,6 +136,19 @@ public class ItemManagementBean extends MasterBean implements IConstant {
 
 	public Categorie getCurrentCategorie() {
 		return currentCategorie;
+	}
+
+	public void setCurrentCategorie(int categoryId) {
+// this method is needed to change categoryId into indexof 
+// categorieList in order to retreive the rightcategory
+		
+		for (Categorie categorie : this.getCategorieList()) {
+			if (categorie.getId()== categoryId) {
+				this.setCurrentCategorie(categorie);
+				break;		// once found, no need to loop 
+			}		
+		}
+		
 	}
 
 	public void setCurrentCategorie(Categorie currentCategorie) {

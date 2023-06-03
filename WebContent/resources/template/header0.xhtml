@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<ui:composition>
+	<h:form>
+
+		<header class="header_container largest "> 
+		<nav
+			class="navigation"> <span class="logo"> <h:commandLink
+				action="/accueil.xhtml" class="logo-link">
+				<h:graphicImage library="images" name="jasmin.png"
+					alt="Logo ecommerce" />
+			</h:commandLink>
+		</span>
+		
+		<input id="menu-toggle" type="checkbox" /> 
+		<label	class="menu-button-container" for="menu-toggle">
+			<div class="menu-button"></div>
+		</label>
+
+		<ul class="nav-list ">
+
+
+			<li><h:commandLink action="/accueil.xhtml">
+					<h:outputText value="#{msg['menu.home']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/login-utilisateur.xhtml">
+					<h:outputText value="#{msg['menu.user.login']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/procurement-management.xhtml">
+					<h:outputText value="#{msg['menu.purchase']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/add-utilisateur.xhtml">
+					<h:outputText value="#{msg['menu.addUser']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/cart.xhtml">
+					<h:outputText value="#{msg['menu.cart']}"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/item-management.xhtml">
+					<h:outputText value="Test"></h:outputText>
+				</h:commandLink></li>
+			<li><h:commandLink action="/resources/module/select-categorie.xhtml">
+					<h:outputText value="selectTest"></h:outputText>
+				</h:commandLink></li>
+				
+				
+			<li class="addOn"><h:outputText value="#{loginBean.welcome}"></h:outputText></li>
+			<li><h:commandLink action="#{loginBean.disconnect}">
+					<h:outputText value="#{msg['menu.disconnect']}"></h:outputText>
+				</h:commandLink></li>
+
+		</ul>
+
+
+
+
+		<span type="button" aria-label="toggle curtain navigation"
+			id="btn-mobile" class="menu-mobile" spellcheck="false"> <span
+			class="line l1"></span> <span class="line l2"></span> <span
+			class="line l3"></span>
+
+		</span> </nav> </header>
+
+
+	</h:form>
+
+</ui:composition>
+
+</html>

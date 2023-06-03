@@ -16,6 +16,10 @@
 			<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
 
+			<fieldset class="fieldset">
+				<legend>
+					<h:outputLabel value="#{msg['add-category.cumulable']}" />
+				</legend>
 			<h:inputText id="nom" value="#{addCategoryBean.categorie.name}"
 				required="true" a:placeholder="#{msg['add-category.nom']}"
 				requiredMessage="#{msg['add-category.prompt.nom']}">
@@ -23,10 +27,6 @@
 			</h:inputText>
 			<h:message for="nom" style="color:red"></h:message>
 
-			<fieldset class="fieldset">
-				<legend>
-					<h:outputLabel value="#{msg['add-category.cumulable']}" />
-				</legend>
 			<h:inputText id="discount"
 				value="#{addCategoryBean.categorie.discount}" required="true"
 				a:placeholder="#{msg['add-category.discount']}"

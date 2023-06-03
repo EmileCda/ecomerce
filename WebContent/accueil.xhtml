@@ -13,7 +13,7 @@
 <ui:composition template="/resources/template/main-template.xhtml">
 	<ui:define name="content">
 		<f:view>
-
+			<div class="main-container">
 			<h:form>
 				<h3>#{msg['home.title']}</h3>
 
@@ -22,22 +22,21 @@
 
 				<div class="main-container">
 					<div class="row-div message">
-					<h:commandLink action="/login-utilisateur.xhtml">
+					<h:commandLink action="/login-utilisateur.xhtml" class="push-button">
 						<h:outputText value="#{msg['home.connection']}"></h:outputText>
 					</h:commandLink>
 						
 					</div>
 					
 					<div class="row-div message">
-					<h:commandLink action="/add-utilisateur.xhtml">
+					<h:commandLink action="/add-utilisateur.xhtml" class="push-button">
 						<h:outputText value="#{msg['home.subscibre']}"></h:outputText>
 					</h:commandLink>
 					
 					</div>
 				</div>
-
-
 			</h:form>
+				</div>
 		</f:view>
 	</ui:define>
 </ui:composition>
