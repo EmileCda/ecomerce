@@ -17,8 +17,8 @@ public class TArticle {
 	public static void main(String[] args) {
 		Utils.trace("*************************** Begin ************************************\n");
 //		createOne();
-		createMany();
-//		readOne();
+//		createMany();
+		readOne();
 //		readMany();
 //		update();
 //		delete();
@@ -130,7 +130,7 @@ public class TArticle {
 	public static void createMany() {
 		Utils.trace("=========================== read many  ===========================\n");
 		int maxIndex = 5;
-		int maxIndexCat = 13;
+		int maxIndexCat = 17;
 
 		Article article = new Article();
 		Utils.trace("%s\n", article);
@@ -139,8 +139,9 @@ public class TArticle {
 		IArticleDao articleDao = new ArticleDao();
 
 		try {
-			for (int indexCat = 1; indexCat < maxIndexCat; indexCat++) {
+			for (int indexCat = 1; indexCat <= maxIndexCat; indexCat++) {
 				categorie = readOneCategory(indexCat);
+				maxIndex = Utils.randInt(1, 10);
 				for (int index = 0; index < maxIndex; index++) {
 					article = DataTest.genArticle();
 					article.setCategorie(categorie);
@@ -185,15 +186,15 @@ public class TArticle {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (article != null)
+		if (article != null) {
 			Utils.trace("%s\n", article);
-		else
+			Utils.trace("%s\n", article.toItemLabel());
+		} else
 			Utils.trace("article null\n");
 
 	}
 
 	public static Categorie readOneCategory(int categorieId) {
-		Utils.trace("=========================== read One  catégorie===========================\n");
 
 		Categorie categorie = null;
 
@@ -204,6 +205,7 @@ public class TArticle {
 			e.printStackTrace();
 		}
 
+		Utils.trace("=======read One catégorie id %d  %s ==============\n", categorieId, categorie.getName());
 		return categorie;
 
 	}

@@ -16,6 +16,8 @@
 		<div class="header-title">
 			<h1>#{msg['project.title']}</h1>
 		</div>
+
+		<h:panelGroup rendered="#{loginBean.isConnected}">
 		<h:form>
 		<div class="addOn">
 			<h:outputText value="#{loginBean.welcome}"></h:outputText>
@@ -25,6 +27,19 @@
 
 		</div>
 		</h:form>
+		</h:panelGroup>
+
+		<h:panelGroup rendered="#{!loginBean.isConnected}">
+		<h:form>
+		<div class="addOn">
+			<h:outputText value="#{loginBean.welcome}"></h:outputText>
+			<h:commandLink action="/login-utilisateur.xhtml" class="button-header">
+				<h:outputText value="#{msg['menu.user.login']}"></h:outputText>
+			</h:commandLink>
+
+		</div>
+		</h:form>
+		</h:panelGroup>
 
 	</div>
 	<div class="lower-bar">
@@ -39,20 +54,22 @@
 				<li><h:commandLink action="/accueil.xhtml">
 						<h:outputText value="#{msg['menu.home']}"></h:outputText>
 					</h:commandLink></li>
-				<li><h:commandLink action="/accueil.xhtml">
-						<h:outputText value="#{msg['menu.user.login']}"></h:outputText>
-					</h:commandLink></li>
 				<li><h:commandLink action="/procurement-management.xhtml">
 						<h:outputText value="#{msg['menu.purchase']}"></h:outputText>
 					</h:commandLink></li>
 				<li><h:commandLink action="/add-user.xhtml">
 						<h:outputText value="#{msg['menu.addUser']}"></h:outputText>
 					</h:commandLink></li>
+				<h:panelGroup rendered="#{loginBean.user.cartItemList.size() gt 0 }">
 				<li><h:commandLink action="/cart.xhtml">
-						<h:outputText value="#{msg['menu.cart']}"></h:outputText>
+						<h:outputText value="#{msg['menu.cart']} #{loginBean.labelCart} "></h:outputText>
+					</h:commandLink></li>                
+				</h:panelGroup>	
+				<li><h:commandLink action="/procurement-management.xhtml">
+						<h:outputText value="Test"></h:outputText>
 					</h:commandLink></li>
 				<li><h:commandLink action="/test.xhtml">
-						<h:outputText value="Test"></h:outputText>
+						<h:outputText value="Test partiel"></h:outputText>
 					</h:commandLink></li>
 			</ul>
 		</h:form>

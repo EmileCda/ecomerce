@@ -52,6 +52,10 @@ public class ArticlePanier implements IConstant, Serializable {
 		this(DEFAULT_ID,quantity,user ,item);
 	}
 
+	public ArticlePanier(int quantity, Article item) {
+		this(DEFAULT_ID,quantity,null,item);
+	}
+
 	public ArticlePanier(int id, int quantity, User user , Article article) {
 		
 		this.setId ( id);

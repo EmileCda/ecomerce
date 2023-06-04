@@ -1,6 +1,11 @@
 package fr.ecommerce.backingbean;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.ecommerce.Ctrl.implement.UserCtrl;
@@ -18,14 +23,30 @@ public class LoginBean  extends MasterBean implements IConstant {
 	private User user;
 	
 	private String welcome = null;
+	private String labelCart= null;
 	private boolean isAdmin ;
 	private boolean isStoreKeeper ;
+	private boolean isClient; ;
+	private boolean nbItemCart; ;
+	private boolean isConnected; ;
+	List<String> pickUpArticleList;
 
 
 	public LoginBean() {
-		this.setIsAdmin(false);
+		
 		user = new User();
 		this.clean();
+		this.setLabelCart(ResourceBundle.getBundle("webPage")
+						.getString("menu.cart"));
+
+		if (this.getPickUpArticleList() == null) {
+			this.setPickUpArticleList(new ArrayList<String>());
+		}
+
+		
+//		this.cheatTest(Profile.COSTUMER);
+
+
 	}
 //%%%%%%%%%%%%%%%%%%%%%%%%%% action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	public String checkUser() throws Exception {
@@ -46,17 +67,16 @@ public class LoginBean  extends MasterBean implements IConstant {
 		this.setPromptStatus("");
 
 		if (userRetreive.getPassword().equals(passwordSaisi)) {
-			this.setIsAdmin(false);		
+			this.setConnected(true);
+			
 			switch (this.getUser().getProfile()) {
-			case COSTUMER: pageReturn =CLIENT_HOME; 
-								break ;  
-			case MANAGER:pageReturn = 
-								ADMIN_HOME; 
-								this.setIsAdmin(true);
-								break ;
-			case STORE_KEEPER: pageReturn =STOREKEEPER_HOME; 
-								this.setStoreKeeper(true);
-								break ;  
+			case COSTUMER: 	pageReturn =CLIENT_HOME;  
+							break ;  
+			case MANAGER:	pageReturn =ADMIN_HOME; 
+							break ;
+			case STORE_KEEPER: 
+							pageReturn =STOREKEEPER_HOME; 
+							break ;  
 			default:
 				return pageReturn = HOME;
 			}
@@ -87,10 +107,8 @@ public class LoginBean  extends MasterBean implements IConstant {
 
 	//-------------------------------------------------------------------------------------------------	
 	public String disconnect() {
-		this.setUser(null );
-		this.setPromptStatus(null);
-		this.setWelcome(null);
-		this.setAdmin(false);
+		
+		resetContent();
 		return HOME;
 	}
 	//-------------------------------------------------------------------------------------------------	
@@ -112,13 +130,15 @@ public class LoginBean  extends MasterBean implements IConstant {
 		}
 
 		public boolean getIsAdmin() {
-			return this.isAdmin();
+			
+			
+			return this.user.getProfile() == Profile.MANAGER;
 		}
 		public void setIsAdmin(boolean isAdmin) {
 			this.setAdmin(isAdmin); 
 		}
 		public boolean isStoreKeeper() {
-			return isStoreKeeper;
+			return this.user.getProfile() == Profile.STORE_KEEPER;
 		}
 		public boolean getIsStoreKeeper() {
 			return this.isStoreKeeper();
@@ -129,6 +149,80 @@ public class LoginBean  extends MasterBean implements IConstant {
 		public void setStoreKeeper(boolean isStoreKeeper) {
 			this.isStoreKeeper = isStoreKeeper;
 		}
+		public boolean getIsClient() {
+			return this.user.getProfile() == Profile.COSTUMER;
+		}
+		public void setClient(boolean isClient) {
+			this.isClient = this.user.getProfile() == Profile.COSTUMER;
+		}
+		public boolean isClient() {
+			return this.user.getProfile() == Profile.COSTUMER;
+		}
+		public void setIsClient(boolean isClient) {
+			this.setClient(this.user.getProfile() == Profile.COSTUMER);
+		}
+		
+		
+		public void cheatTest(Profile profile) {
+			
+			User cheatUser = new User();
+			cheatUser = DataTest.genUser();
+			cheatUser.setProfile(profile);
+			this.setUser(cheatUser);
+			this.setIsClient(this.user.getProfile() == Profile.COSTUMER);
+			this.setWelcome(String.format("Bonjour cheatUser [%s] %s is client %b--%b",
+					user.getProfile().getName(),user.getFirstname(),
+					this.getIsClient(),
+							this.isClient));
+			
+			
+		}
+		public boolean isNbItemCart() {
+			return nbItemCart;
+		}
+		public void setNbItemCart(boolean nbItemCart) {
+			this.nbItemCart = nbItemCart;
+		}
+		public String getLabelCart() {
+			return labelCart;
+		}
+		public void setLabelCart(String labelCart) {
+			this.labelCart = labelCart;
+		}
+
+		public void resetContent() {
+			
+			this.getUser().clean();
+			this.setPromptStatus("");
+			this.setWelcome("");
+			this.setIsConnected(false);
+			this.setLabelCart(ResourceBundle.getBundle("webPage")
+					.getString("menu.cart"));
+			this.setAdmin(false);
+			this.getPickUpArticleList().clear();
+			
+		}
+		public List<String> getPickUpArticleList() {
+			return pickUpArticleList;
+		}
+		public void setPickUpArticleList(List<String> pickUpArticleList) {
+			this.pickUpArticleList = pickUpArticleList;
+		}
+		public boolean isConnected() {
+			return isConnected;
+		}
+		public boolean getIsConnected() {
+			return this.isConnected();
+
+		}
+		public void setIsConnected(boolean isConnected) {
+			this.setConnected(isConnected);
+		}
+
+		public void setConnected(boolean isConnected) {
+			this.isConnected = isConnected;
+		}
+
 
 		
 }

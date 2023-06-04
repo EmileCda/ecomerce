@@ -238,15 +238,6 @@ public class Article extends ClassDao implements IConstant, Serializable {
 		this.cartItemList = cartItemList;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("Id[%d] %s : %s %.2f€, -%d %%, stock:%d, %svendable, img:%s, vid :%s",
-				getId(), getName(), getDescription(), getPrice(), getDiscount(), getInventory(), 
-				isSalable()?"":"non-",
-				getPicture(), getVideo());
-
-	}
-
 	public List<LigneDeCommande> getOrderLineList() {
 		return orderLineList;
 	}
@@ -261,6 +252,24 @@ public class Article extends ClassDao implements IConstant, Serializable {
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Id[%d] %s : %s %.2f€, -%d %%, stock:%d, %svendable, img:%s, vid :%s",
+				getId(), getName(), getDescription(), getPrice(), getDiscount(), getInventory(), 
+				isSalable()?"":"non-",
+				getPicture(), getVideo());
+
+	}
+
+	public String toItemLabel() {
+		return String.format("%s %.2f€, -%d%%, stock:%d, %svendable, img:%s, vid :%s",
+				getName(),  getPrice(), getDiscount(), getInventory(), 
+				isSalable()?"":"non-",
+						getDescription(),
+				getPicture(), getVideo());
+
 	}
 
 

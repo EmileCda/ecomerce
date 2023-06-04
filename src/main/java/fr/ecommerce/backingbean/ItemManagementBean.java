@@ -1,9 +1,13 @@
 package fr.ecommerce.backingbean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 
@@ -11,9 +15,12 @@ import fr.ecommerce.Ctrl.implement.UserCtrl;
 import fr.ecommerce.Ctrl.interfaces.IUserCtrl;
 import fr.ecommerce.common.IConstant;
 import fr.ecommerce.entity.Article;
+import fr.ecommerce.entity.ArticlePanier;
 import fr.ecommerce.entity.Categorie;
 import fr.ecommerce.entity.User;
+import fr.ecommerce.model.dao.implement.ArticleDao;
 import fr.ecommerce.model.dao.implement.CategorieDao;
+import fr.ecommerce.model.dao.interfaces.IArticleDao;
 import fr.ecommerce.model.dao.interfaces.ICategorieDao;
 import fr.ecommerce.utils.Utils;
 
@@ -22,14 +29,22 @@ import fr.ecommerce.utils.Utils;
 public class ItemManagementBean extends MasterBean implements IConstant {
 
 	List<Categorie> categorieList;
-	int  categorieId ;
+	int categorieId;
+	int nbItem;
 	Categorie currentCategorie;
+	private boolean articleChecked;
+	List<Article> articleList;
+
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
 
 	public ItemManagementBean() {
-		
-		
+
 		if (this.getCategorieList() == null) {
 			this.setCategorieList(new ArrayList<Categorie>());
+		}
+		if (this.getArticleList() == null) {
+			this.setArticleList(new ArrayList<Article>());
 		}
 		ICategorieDao categorieDao = new CategorieDao();
 		try {
@@ -37,86 +52,144 @@ public class ItemManagementBean extends MasterBean implements IConstant {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		if (this.getCategorieList().size()>=0 ) {				// prendre l'id (par défaut) du premier de la liste 
-			this.setCategorieId(this.getCategorieList()
-								.get(0)
-								.getId());
-			
-		}else
-			this.setCategorieId(DEFAULT_ID);								// in case of empty list
-		
+
+		if (this.getCategorieList().size() >= 0) { // prendre l'id (par défaut) du premier de la liste
+			this.setCategorieId(this.getCategorieList().get(0).getId());
+
+		} else
+			this.setCategorieId(DEFAULT_ID); // in case of empty list
+
 		setCurrentCategorie(this.getCategorieId());
 		this.cleanPromptStatus();
-		this.setPromptStatus(String.format("catégorie en cours : %s",this.getCurrentCategorie().getName() ));
-		
+		this.setPromptStatus(String.format("catégorie en cours : %s", this.getCurrentCategorie().getName()));
 
 	}
-	//-------------------------------------------------------------------------------------------------	
-	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	// -------------------------------------------------------------------------------------------------
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% action
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-		public String updateCategorie(Categorie categorie) {
+	public String updateCategorie(Categorie categorie) {
 
-				// redirection vers une nouvelle page de gestion des catégorie
-			String pageReturn = null ; 
-			
-			return pageReturn;
-		}
-		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		// redirection vers une nouvelle page de gestion des catégorie
+		String pageReturn = null;
 
-		public String deleteCategory(Categorie categorie) {
-			
-			String pageReturn = null ; 
+		return pageReturn;
+	}
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% action
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	public String deleteCategory(Categorie categorie) {
+
+		String pageReturn = null;
+
+		return pageReturn;
+	}
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% action
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	public String updateItem(Categorie categorie) {
+
+		String pageReturn = null;
+
+		return pageReturn;
+	}
+
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% action
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	public String updateItem(Article article) {
+
+		String pageReturn = null;
+
+		return pageReturn;
+	}
+
+
+
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% action
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	public String addItemToCart() {
+
+		String pageReturn = null;
+		Article article = new Article();
+		ArticlePanier articlePanier ;
 		
-			return pageReturn;
-		}
-		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		for (String articleStringId : this.getLoginBean().getPickUpArticleList()) {
 
-		public String updateItem(Categorie categorie) {
-			
-			String pageReturn = null ; 
-		
-			return pageReturn;
+			Utils.trace("[%s]\n", articleStringId);
+			int articleId = Integer.parseInt(articleStringId);
+			if (articleId > 0) {
+				article = getArticle(articleId);
+				articlePanier = new ArticlePanier(1, article);
+				this.getLoginBean().getUser().addCartItem(articlePanier);
+			}
 		}
-		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		public String updateItem(Article article) {
-			
-			String pageReturn = null ; 
+		this.getLoginBean().getPickUpArticleList().clear(); // clear the list once transfered in user.cartItemList
 		
-			return pageReturn;
-		}
-		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		public String deleteItem(Article article) {
-			
-			String pageReturn = null ; 
-		
-			return pageReturn;
-		}
-		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		public String addItempToCart(Article article) {
-			
-			String pageReturn = null ;
-			
-			
-		
-			return pageReturn;
-		}
-		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		this.getLoginBean().setLabelCart(
+				String.format("%d",this.getLoginBean()
+								. getUser()
+								.getCartItemList().size()));
+		return pageReturn;
+	}
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% action
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-		public String categorieChange(ValueChangeEvent eventCategoryList) {
-			String pageReturn = null ;
-			int categoryId = (int)eventCategoryList.getNewValue();
-//			Categorie categorySelected = this.getCategorieList().get(categoryId );
+	public String deleteItem (ArticlePanier articlePanier) {
+		String pageReturn =null;
+		this.getLoginBean().getUser().getCartItemList().remove(articlePanier);
+		return pageReturn;
+	}
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% action
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-			this.setCurrentCategorie( categoryId);
+	public String updateCurrentCategorie(ValueChangeEvent eventCategoryList) {
+		String pageReturn = null;
+		int categoryId = (int) eventCategoryList.getNewValue();
+
+		this.setCurrentCategorie(categoryId);
+
+		this.setPromptStatus(String.format("catégorie en cours : %s", this.getCurrentCategorie().getName()));
+		return pageReturn;
+	}
+
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	// -------------------------------------------------------------------------------------------------
+	public String calculateOrder() {
+		String pageReturn = null;
+		
+		for (ArticlePanier articlePanier : this.getLoginBean().getUser().getCartItemList()) {
 			
-			this.setPromptStatus(String.format("catégorie en cours : %s",this.getCurrentCategorie().getName() ));
-			return pageReturn;
+			Utils.trace ("%d %s %s\n",articlePanier.getQuantity()
+					,articlePanier.getArticle().getName() );
 		}
-	//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	//-------------------------------------------------------------------------------------------------	
+		return pageReturn;
+		
+	}
 
-	//-------------------------------------------------------------------------------------------------
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	// -------------------------------------------------------------------------------------------------
+	public String validateOrder() {
+		String pageReturn = null;
+		
+		return pageReturn;
+		
+	}
+
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	// -------------------------------------------------------------------------------------------------
+	public Article getArticle(int articleId) {
+
+		Article article = new Article();
+		IArticleDao articleDao = new ArticleDao();
+		try {
+			article = articleDao.getArticleById(articleId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return article;
+	}
+
+	// -------------------------------------------------------------------------------------------------
 	public List<Categorie> getCategorieList() {
 		return categorieList;
 	}
@@ -124,7 +197,6 @@ public class ItemManagementBean extends MasterBean implements IConstant {
 	public void setCategorieList(List<Categorie> categorieList) {
 		this.categorieList = categorieList;
 	}
-
 
 	public int getCategorieId() {
 		return categorieId;
@@ -141,18 +213,60 @@ public class ItemManagementBean extends MasterBean implements IConstant {
 	public void setCurrentCategorie(int categoryId) {
 // this method is needed to change categoryId into indexof 
 // categorieList in order to retreive the rightcategory
-		
+
 		for (Categorie categorie : this.getCategorieList()) {
-			if (categorie.getId()== categoryId) {
+			if (categorie.getId() == categoryId) {
 				this.setCurrentCategorie(categorie);
-				break;		// once found, no need to loop 
-			}		
+				break; // once found, no need to loop
+			}
 		}
-		
+
 	}
 
 	public void setCurrentCategorie(Categorie currentCategorie) {
 		this.currentCategorie = currentCategorie;
+	}
+
+	public boolean isArticleChecked() {
+		return articleChecked;
+	}
+
+	public void setArticleChecked(boolean articleChecked) {
+		this.articleChecked = articleChecked;
+	}
+
+	public boolean getIsArticleChecked() {
+		return this.getIsArticleChecked();
+	}
+
+	public void setIsArticleChecked(boolean articleChecked) {
+		this.setArticleChecked(articleChecked);
+	}
+
+	public List<Article> getArticleList() {
+		return articleList;
+	}
+
+	public void setArticleList(List<Article> articleList) {
+		this.articleList = articleList;
+	}
+
+
+
+	public int getNbItem() {
+		return nbItem;
+	}
+
+	public void setNbItem(int nbItem) {
+		this.nbItem = nbItem;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 
 }

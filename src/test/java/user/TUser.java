@@ -1,13 +1,18 @@
 package user;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import fr.ecommerce.Ctrl.implement.UserCtrl;
 import fr.ecommerce.Ctrl.interfaces.IUserCtrl;
+import fr.ecommerce.entity.Article;
+import fr.ecommerce.entity.ArticlePanier;
 import fr.ecommerce.entity.User;
 import fr.ecommerce.enums.Profile;
+import fr.ecommerce.model.dao.implement.ArticleDao;
 import fr.ecommerce.model.dao.implement.UserDao;
+import fr.ecommerce.model.dao.interfaces.IArticleDao;
 import fr.ecommerce.model.dao.interfaces.IUserDao;
 import fr.ecommerce.utils.DataTest;
 import fr.ecommerce.utils.Utils;
@@ -16,7 +21,8 @@ public class TUser {
 
 	public static void main(String[] args) {
 		Utils.trace("*************************** Begin ************************************\n");
-		initUserTest();
+		addArticlePanier();
+//		initUserTest();
 //		createOne();
 //		createMany();
 //		readOne(1);
@@ -267,6 +273,7 @@ public class TUser {
 
 	}
 
+	
 	// -------------------------------------------------------------------------------------------------
 	public static void readOne(int userId) {
 		Utils.trace("=========================== read One  by Id===========================\n");
@@ -278,4 +285,58 @@ public class TUser {
 			Utils.trace("user null\n");
 
 	}
+// -------------------------------------------------------------------------------------------------
+		public static void addArticlePanier() {
+			Utils.trace("%s\n", "ici");
+			User user = new User();
+			Utils.trace("%s\n",user);
+			Article article = new Article();
+
+			for (int index = 10; index < 20; index ++) {
+				user = getUser(index);
+				if (user != null ) break; 
+				
+			}
+			
+			Utils.trace("%s\n",user);
+		
+			ArticlePanier  articlePanier;
+			for (int index= 10 ; index < 20 ; index++) {
+				
+				article= getArticle(index);
+				Utils.trace("%s\n",article);
+				
+				articlePanier = new ArticlePanier(100+index, article);
+				
+				user.addCartItem(articlePanier);
+				
+			}
+			Utils.trace("%s\n",user);
+			Utils.trace("%d\n",user.getCartItemList().size());
+			
+			for (ArticlePanier aPanier : user.getCartItemList()) {
+				Utils.trace("%s\n",
+						aPanier.getArticle().getName());
+				
+				Utils.trace("%s \n",
+						aPanier.getUser().getEmail());
+			}
+			
+		}
+
+
+		
+//-------------------------------------------------------------------------------------------------		
+		public static Article getArticle(int ArticleId) {
+			Article article = new Article();
+			IArticleDao articleDao = new ArticleDao();
+			try {
+				article = articleDao.getArticleById(ArticleId);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return article ; 
+
+		}
+
 }

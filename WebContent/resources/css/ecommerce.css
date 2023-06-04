@@ -294,6 +294,43 @@ a:hover {
 	background: none repeat scroll 0 var(--mid);
 }
 
+/* =========================== $$$$$$$$$$$$$$ cart list  $$$$$$$$$$$$$$ ===========================*/
+
+.cartTable {
+	border-collapse: collapse;
+	text-align: left;
+	border: 1px dashed var (--mid);
+}
+
+.cartTable th {
+  text-align: left;
+}
+
+.cartTable-header {
+	text-align: center;
+	background: none repeat scroll 0 0 var (--mid);
+	border-bottom: 1px solid var(--for);
+	padding: 16px;
+}
+
+.cartTable-odd-row {
+	text-align: center;
+	background: none repeat scroll 0 0 var(--back);
+
+	border-top: 1px solid #ar(--for);
+}
+
+.cartTable-even-row {
+	text-align: center;
+	background: none repeat scroll 0 0  var(----mid);
+	border-top: 1px solid #ar(--for);
+}
+
+.category-table-column {
+	background: none repeat scroll 0 var(--mid);
+	text-align: left;
+}
+
 
 
 .footer {

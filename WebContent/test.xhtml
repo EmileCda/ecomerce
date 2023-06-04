@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -7,56 +7,103 @@
 <body>
 	<f:view>
 		<head>
-<title>Un formulaire d'inscription JSF</title>
+<title>test partiel</title>
 		</head>
 		<h:form>
-			<h4>
-				ZZFormulaire JSF d'inscription au <a
-					href="http://www.objis.com/formation-java/club-objis.html">Club
-					Objis</a>.
-			</h4>
-			<table>
+			<table border="1">
+
+
 				<tr>
-					<td>Pr�nom:</td>
-					<td><h:inputText value="#{userbean.prenom}" required="true"
-							id="prenom" /> <h:message for="prenom" /></td>
-				</tr>
-				<tr>
-					<td>Nom:</td>
-					<td><h:inputText value="#{userbean.nom}" required="true"
-							id="nom" /> <h:message for="nom" /></td>
-				</tr>
-				<tr>
-					<td>Sexe:</td>
-					<td><h:selectOneRadio value="#{userbean.genre}"
-							required="true" id="genre">
-							<f:selectItem itemLabel="Homme" itemValue="homme" />
-							<f:selectItem itemLabel="Femme" itemValue="femme" />
-						</h:selectOneRadio> <h:message for="genre" /></td>
-				</tr>
-				<tr>
-					<td>Date de naissance:</td>
-					<td><h:inputText value="#{userbean.datedenaissance}"
-							id="datenaissance" required="true">
-						</h:inputText> (mm-dd-yy) <h:message for="datenaissance" /></td>
-				</tr>
-				<tr>
-					<td>Email:</td>
-					<td><h:inputText value="#{userbean.email}" required="true"
-							id="email" /> <h:message for="email" /></td>
-				</tr>
-				<tr>
-					<td>Qualit� de service:</td>
-					<td><h:selectOneMenu value="#{userbean.niveaudeservice}">
-							<f:selectItem itemLabel="Basic" itemValue="basic" />
-							<f:selectItem itemLabel="Medium" itemValue="medium" />
-							<f:selectItem itemLabel="Premium" itemValue="premium" />
-						</h:selectOneMenu></td>
+
+					<td><f:facet name="header">#{msg['cart.prixBrute']}</f:facet>
+						<h:outputLabel size="3" style="display:block;width:100px"
+							value="#{100 /7}€" /></td>
+					<td><f:facet name="header">#{msg['cart.prixBrute']}</f:facet>
+						<h:outputLabel size="3" style="display:block;width:100px"
+							value="#{100  /11}€" >
+							<f:convertNumber pattern="#0.00" />
+							</h:outputLabel>
+							
+							</td>
+
 				</tr>
 			</table>
-			<p>
-				<h:commandButton value="Inscription" action="confirm" />
-			</p>
+			
+			<h:commandLink value="#{msg['cart.calculate']}"  
+			 	
+			action="#{itemManagementBean.calculateOrder}" >
+				<h:outputText value="#{msg['home.subscibre']}"></h:outputText>
+					</h:commandLink>
+
+class="push-button"
+
+			<!-- 		lineDirection -->
+			<!-- // contenu du résultat -->
+
+
+			<!-- 			<table> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Prénom:</td> -->
+			<!-- 					<td> -->
+			<!-- 					<h:selectBooleanCheckbox value="#{user.rememberMe}" /> Remember Me -->
+
+			<!-- 							</td> -->
+			<!-- 				</tr> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Prénom:</td> -->
+			<!-- 					<td> -->
+			<!-- 					<h:selectBooleanCheckbox value="#{user.rememberMe}" /> Remember Me -->
+
+			<!-- 							</td> -->
+			<!-- 				</tr> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Prénom:</td> -->
+			<!-- 					<td> -->
+			<!-- 					<h:selectBooleanCheckbox value="#{user.rememberMe}" /> Remember Me -->
+
+			<!-- 							</td> -->
+			<!-- 				</tr> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Prénom:</td> -->
+			<!-- 					<td><h:inputText value="#{userbean.prenom}" required="true" -->
+			<!-- 							id="prenom" /> <h:message for="prenom" /></td> -->
+			<!-- 				</tr> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Nom:</td> -->
+			<!-- 					<td><h:inputText value="#{userbean.nom}" required="true" -->
+			<!-- 							id="nom" /> <h:message for="nom" /></td> -->
+			<!-- 				</tr> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Sexe:</td> -->
+			<!-- 					<td><h:selectOneRadio value="#{userbean.genre}" -->
+			<!-- 							required="true" id="genre"> -->
+			<!-- 							<f:selectItem itemLabel="Homme" itemValue="homme" /> -->
+			<!-- 							<f:selectItem itemLabel="Femme" itemValue="femme" /> -->
+			<!-- 						</h:selectOneRadio> <h:message for="genre" /></td> -->
+			<!-- 				</tr> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Date de naissance:</td> -->
+			<!-- 					<td><h:inputText value="#{userbean.datedenaissance}" -->
+			<!-- 							id="datenaissance" required="true"> -->
+			<!-- 						</h:inputText> (mm-dd-yy) <h:message for="datenaissance" /></td> -->
+			<!-- 				</tr> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Email:</td> -->
+			<!-- 					<td><h:inputText value="#{userbean.email}" required="true" -->
+			<!-- 							id="email" /> <h:message for="email" /></td> -->
+			<!-- 				</tr> -->
+			<!-- 				<tr> -->
+			<!-- 					<td>Qualité de service:</td> -->
+			<!-- 					<td><h:selectOneMenu value="#{userbean.niveaudeservice}"> -->
+			<!-- 							<f:selectItem itemLabel="Basic" itemValue="basic" /> -->
+			<!-- 							<f:selectItem itemLabel="Medium" itemValue="medium" /> -->
+			<!-- 							<f:selectItem itemLabel="Premium" itemValue="premium" /> -->
+			<!-- 						</h:selectOneMenu></td> -->
+			<!-- 				</tr> -->
+			<!-- 			</table> -->
+			<!-- 			<p> -->
+			<!-- 				<h:commandButton value="Inscription" action="confirm" /> -->
+			<!-- 			</p> -->
 		</h:form>
 
 	</f:view>

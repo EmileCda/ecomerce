@@ -10,19 +10,18 @@
 		<f:view>
 			<h:form>
 				<h2>#{msg['procurement.management.title']}</h2>
-				<h:outputText value="bonjour #{loginBean.user.firstname}" />
-				<br />
-				<h:outputText
-					value=" #{msg['procurement.management.you.are']} : #{loginBean.user.profile.name}" />" 
 				<h:selectOneMenu value="#{itemManagementBean.categorieId}"
 					onchange="submit()"
-					valueChangeListener="#{itemManagementBean.categorieChange}">
+					valueChangeListener="#{itemManagementBean.updateCurrentCategorie}">
 					<f:selectItems value="#{itemManagementBean.categorieList}"
 						var="oneCat" itemValue="#{oneCat.id}" itemLabel="#{oneCat.name}" />
 				</h:selectOneMenu>
 			</h:form>
 
-			<ui:include src="/resources/module/item-by-category.xhtml" />
+		 <ui:fragment rendered="#{loginBean.isClient}">
+		    <ui:include src="/resources/module/item-by-category-client.xhtml" />
+		</ui:fragment>
+			
 
 		</f:view>
 	</ui:define>
