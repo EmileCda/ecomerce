@@ -14,29 +14,31 @@
 	<ui:define name="content">
 		<f:view>
 			<div class="main-container">
-			<h:form>
-				<h3>#{msg['home.title']}</h3>
+				<h:form>
+					<h3>#{msg['home.title']}</h3>
 
-				<h:graphicImage library="images" name="homepage.jpg"
-					class="homePage" />
+					<h:graphicImage library="images" name="homepage.jpg"
+						class="homePage" />
 
-				<div class="main-container">
-					<div class="row-div message">
-					<h:commandLink action="/login-utilisateur.xhtml" class="push-button">
-						<h:outputText value="#{msg['home.connection']}"></h:outputText>
-					</h:commandLink>
-						
+					<div class="main-container">
+						<div class="row-div message">
+							<h:commandLink action="/login-utilisateur.xhtml"
+								class="push-button">
+								<h:outputText value="#{msg['home.connection']}"></h:outputText>
+							</h:commandLink>
+
+						</div>
+
+						<div class="row-div message">
+							<h:commandLink action="/add-utilisateur.xhtml"
+								class="push-button">
+								<h:outputText value="#{msg['home.subscibre']}"></h:outputText>
+							</h:commandLink>
+
+						</div>
 					</div>
-					
-					<div class="row-div message">
-					<h:commandLink action="/add-utilisateur.xhtml" class="push-button">
-						<h:outputText value="#{msg['home.subscibre']}"></h:outputText>
-					</h:commandLink>
-					
-					</div>
-				</div>
-			</h:form>
-				</div>
+				</h:form>
+			</div>
 		</f:view>
 	</ui:define>
 </ui:composition>
