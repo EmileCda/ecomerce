@@ -24,15 +24,7 @@ public class AdminBean  extends MasterBean implements IConstant {
 	
 	public AdminBean() {
 
-		if (userList == null) {
-			userList = new ArrayList<User>();
-		}
-		IUserCtrl userCtrl = new UserCtrl();
-		try {
-			userList = userCtrl.getUsers();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+				RetreiveUserList();
 	}
 //-------------------------------------------------------------------------------------------------	
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,6 +86,24 @@ public class AdminBean  extends MasterBean implements IConstant {
 	}
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //-------------------------------------------------------------------------------------------------	
+
+		public void RetreiveUserList() {
+
+			if (this.getUserList() == null) {
+				this.setUserList(new ArrayList<User>()); 
+			}else
+				this.getUserList().clear();
+			
+			
+			IUserCtrl userCtrl = new UserCtrl();
+			try {
+				userList = userCtrl.getUsers();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+//-------------------------------------------------------------------------------------------------	
+
 
 	public List<User> getUserList() {
 		return userList;

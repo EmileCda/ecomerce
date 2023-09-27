@@ -23,6 +23,10 @@ public class MasterBean {
 	public void setPromptStatus(String promptStatus) {
 		this.promptStatus = promptStatus;
 	}
+	public void setPromptStatus(String patern, Object... arguments) {
+		this.setPromptStatus( String.format(patern, arguments));
+		
+	}
 	
 	public void cleanPromptStatus() {
 		this.setPromptStatus(null);

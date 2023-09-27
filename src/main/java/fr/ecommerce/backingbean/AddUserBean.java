@@ -29,7 +29,13 @@ public class AddUserBean extends MasterBean implements IConstant {
 	private Profile manager;
 	
 	private boolean displaySetProfile;
-
+	
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+		
+	@ManagedProperty(value = "#{adminBean}")
+	private AdminBean adminBean;
+	
 	
 	public AddUserBean() {
 		this.setUser(new User());
@@ -63,12 +69,13 @@ public class AddUserBean extends MasterBean implements IConstant {
 			Utils.trace("catch addClient %s\n", e.toString());
 			return null; 
 		} 
-		
-		if (getUser().getProfile() == Profile.MANAGER)
+		this.setPromptStatus(" Creation du user %s  réussit", this.getUser().getEmail());
+		if (this.getLoginBean().getUser().getProfile() == Profile.MANAGER)
 			landingWebPage = ADMIN_HOME;
 		
 		this.getUser().clean();
 		return landingWebPage ; 
+	}
 	}
 	
 //%%%%%%%%%%%%%%%%%%%%%%%%%% action %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
